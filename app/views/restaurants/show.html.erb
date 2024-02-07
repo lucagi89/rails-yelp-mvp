@@ -1,0 +1,29 @@
+
+<li><%= link_to "Back", restaurants_path %></li>
+
+
+
+<h1>
+<%= @restaurant.name %>
+<%= link_to "✏️", edit_restaurant_path(@restaurant) %>
+<%= link_to "❌", restaurant_path(@restaurant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+</h1>
+
+<p><%= @restaurant.address %></p>
+<p><%= @restaurant.phone_number %></p>
+<p><%= @restaurant.category %></p>
+
+
+<h2>Reviews:</h2>
+
+  <% @restaurant.reviews.each do |review| %>
+  <div>
+    <p><%= review.content %></p>
+    <p><%= "⭐️" * review.rating + "✩"*(5 - review.rating) %></p>
+    <%= link_to "🗑️", review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  %>
+  </div>
+  <% end %>
+
+
+
+<p><%= link_to "Add a review", new_restaurant_review_path(@restaurant)%></p>
